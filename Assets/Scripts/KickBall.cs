@@ -9,8 +9,6 @@ public class KickBall : MonoBehaviour
     [SerializeField] private GameObject gatePoint;
     [SerializeField] private float speed;
 
-
-    private SpringJoint2D[] _sprintJoints;
     private Rigidbody2D _ballRb;
 
     private bool _moveBall;
@@ -18,19 +16,12 @@ public class KickBall : MonoBehaviour
 
     private void Start()
     {
-        _sprintJoints = ball.GetComponents<SpringJoint2D>();
         _ballRb = ball.GetComponent<Rigidbody2D>();
     }
 
     public void Kick()
     {
-        foreach (SpringJoint2D joint in _sprintJoints)
-        {
-            joint.enabled = false;
-
-            
-        }
-        //_ballRb.AddForce(_gatePoint.transform.position * _speed, ForceMode2D.Impulse);
+            //_ballRb.AddForce(_gatePoint.transform.position * _speed, ForceMode2D.Impulse);
         _moveBall = true;
        
     }
@@ -48,7 +39,7 @@ public class KickBall : MonoBehaviour
         if (_moveBall)
         {
             ball.transform.SetParent(null);
-          
+
             ball.transform.position = Vector3.MoveTowards(ball.transform.position, gatePoint.transform.position, speed);
             if (Vector2.Distance(ball.transform.position, gatePoint.transform.position) < 0.01)
             {
@@ -58,5 +49,4 @@ public class KickBall : MonoBehaviour
             }
         }
     }
-
 }
